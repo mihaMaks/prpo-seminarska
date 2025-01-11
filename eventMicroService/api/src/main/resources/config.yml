@@ -1,0 +1,31 @@
+kumuluzee:
+  server:
+    http:
+      port: 8081
+  openapi:
+    swagger-ui:
+      enabled: true
+      path: /swagger-ui
+  name: ksk-baza
+  version: 1.0.0
+  env:
+    name: dev
+  datasources:
+    - jndi-name: jdbc/KSK-bazaDS
+      connection-url: jdbc:postgresql://postgresql-container:5432/ksk-baza
+      username: postgres
+      password: postgres
+      max-pool-size: 20
+  health:
+    checks:
+      data-source-health-check:
+        type: liveness
+        jndi-name: jdbc/KSK-bazaDS
+  rest-client:
+    registrations:
+      - class: priporocilni-sistem-api
+        url: http://localhost:8081/v1
+        read-timeout: 5000
+integrations:
+  priporocilni-sistem:
+    base-url: http://localhost:8081/v1

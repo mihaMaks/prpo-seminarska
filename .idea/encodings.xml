@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/emailMicroService/api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/emailMicroService/api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/emailMicroService/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/emailMicroService/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/entryFormMicroService/api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/entryFormMicroService/api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/entryFormMicroService/entitete/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/entryFormMicroService/entitete/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/entryFormMicroService/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/entryFormMicroService/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/entryFormMicroService/storitve/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/entryFormMicroService/storitve/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eventMicroService/api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eventMicroService/api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eventMicroService/entitete/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eventMicroService/entitete/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eventMicroService/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eventMicroService/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eventMicroService/storitve/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eventMicroService/storitve/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/memberMicroService/api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/memberMicroService/api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/memberMicroService/entitete/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/memberMicroService/entitete/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/memberMicroService/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/memberMicroService/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/memberMicroService/storitve/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/memberMicroService/storitve/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

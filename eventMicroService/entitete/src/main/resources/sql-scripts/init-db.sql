@@ -1,0 +1,13 @@
+INSERT INTO uporabnik (ime, priimek, uporabnisko_ime, email) VALUES ('Petra', 'Kos', 'petrakos', 'petra.kos@hotmail.com');
+INSERT INTO uporabnik (ime, priimek, uporabnisko_ime, email) VALUES ('Miha', 'Novak', 'mihanovak', 'miha.novak@gmail.com');
+INSERT INTO nakupovalni_seznam (naziv, opis, ustvarjen, uporabnik_id) VALUES ('Špecerija', 'Tedenski nakup', '2016-05-28T17:39:44.937', 1);
+INSERT INTO nakupovalni_seznam (naziv, opis, ustvarjen, uporabnik_id) VALUES ('Oprema doma', 'Pohištvo in ostali dodatki', '2016-05-28T17:39:44.937', 2);
+INSERT INTO artikel (naziv, opis, nakupovalni_seznam_id) VALUES ('Mleko', 'Mleko 3,5 %.', 1);
+INSERT INTO artikel (naziv, opis, nakupovalni_seznam_id) VALUES ('Salama', 'Izberi poljubno.', 1);
+INSERT INTO artikel (naziv, opis, nakupovalni_seznam_id) VALUES ('Testenine', 'Polnozrnate.', 1);
+INSERT INTO artikel (naziv, opis, nakupovalni_seznam_id) VALUES ('Nož', 'Nož za kruh.', 2);
+INSERT INTO artikel (naziv, opis, nakupovalni_seznam_id) VALUES ('Škarje', 'Kuhinjske škarje.', 2);
+INSERT INTO oznaka (naslov) VALUES ('Dom');
+INSERT INTO oznaka (naslov) VALUES ('Špecerija');
+INSERT INTO nakupovalni_seznam_oznaka (nakupovalni_seznam_id, oznaka_id) VALUES (1, 1);
+INSERT INTO nakupovalni_seznam_oznaka (nakupovalni_seznam_id, oznaka_id) VALUES (2, 2);
