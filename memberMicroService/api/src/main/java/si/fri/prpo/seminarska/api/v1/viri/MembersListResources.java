@@ -14,6 +14,8 @@ import si.fri.prpo.seminarska.entitete.Event;
 import si.fri.prpo.seminarska.entitete.Member;
 import si.fri.prpo.seminarska.entitete.CertificateOfEnrollment;
 import si.fri.prpo.seminarska.zrna.MembersListBean;
+import javax.json.bind.Jsonb;
+import javax.json.bind.JsonbBuilder;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -21,6 +23,7 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
@@ -37,6 +40,7 @@ public class MembersListResources {
 
     @Inject
     private MembersListBean membersListBean;
+
 
     @Operation(
             summary = "Get list of members",
@@ -511,8 +515,8 @@ public class MembersListResources {
             //implement http call to http://localhost:8080/v1/{eventId}/{memberId}
             // HTTP client setup
             Client client = ClientBuilder.newClient();
-            System.out.println("Calling URL: " + "http://event-service:8081/v1/events/for/" + memberId);
-            WebTarget target = client.target("http://event-service:8081/v1/events/for/" + memberId);
+            System.out.println("Calling URL: " + "http://event-service-1:8081/v1/events/for/" + memberId);
+            WebTarget target = client.target("http://event-service-1:8081/v1/events/for/" + memberId);
 
             // Perform the HTTP GET request
             Response response = target.request(MediaType.APPLICATION_JSON).get();
@@ -689,7 +693,7 @@ public class MembersListResources {
 
             // Fetch the event using an HTTP GET request
             Client client = ClientBuilder.newClient();
-            WebTarget target = client.target("http://localhost:8081/v1/events/" + eventId);
+            WebTarget target = client.target("http://event-service-1:8081/v1/events/" + eventId);
             Response eventResponse = target.request(MediaType.APPLICATION_JSON).get();
 
             if (eventResponse.getStatus() != Response.Status.OK.getStatusCode()) {
@@ -701,19 +705,27 @@ public class MembersListResources {
                 event.setAttendingMembers(new ArrayList<>());
             }
 
-            // Associate member and event
-            Event updatedEvent = null;
             Member updatedMember = null;
             if (!event.getAttendingMembers().contains(member)) {
                 event.getAttendingMembers().add(member);
                 member.getVisitedEvents().add(event);
-                updatedMember = membersListBean.updateMember(member.getId(), member);
-                //TO DO: call eventresource to update event
-                //updatedEvent = eventsListBean.updateEvent(event.getId(), event);
+
+
+                updatedMember = membersListBean.updateMemberEvents(member.getId(), event);
+
+                for(int i=0; i<updatedMember.getVisitedEvents().size(); i++) {
+                    System.out.println("Member "+member.getId()+" visited events with id:"+member.getVisitedEvents().get(i).getId());
+                }
+                for(int i=0; i<event.getAttendingMembers().size(); i++) {
+                    System.out.println("Event "+event.getId()+" visited member with id:"+event.getAttendingMembers().get(i).getId());
+                }
+
+            }else{
+                System.out.println("Member "+member.getId()+" already visited event with id:"+ event.getId());
             }
 
-            if (updatedMember != null && updatedEvent != null) {
-                return Response.ok(updatedEvent).build();
+            if (updatedMember != null) {
+                return Response.ok().entity(updatedMember).build();
             }
 
             return Response.status(Response.Status.BAD_REQUEST)

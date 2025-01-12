@@ -52,9 +52,9 @@ docker build -t form-service-image .
 ```
 ```bash
 docker run -d -p 9090:9090 --network=mynetwork form-service-image
-docker run -d -p 9090:9090 --network=mynetwork form-service-image
+docker run -d -p 9090:9090 --network=mynetwork -p 9090:9090 form-service-image
 
-docker run --name form-service --network mynetwork -p 9090:9090 form-service-image
+docker run --name form-service-1 --network mynetwork -p 9090:9090 form-service-image
 
 ```
 ```bash

@@ -25,6 +25,7 @@ import java.time.LocalDate;
                         name = "Members.getEventsForMember",
                         query = "SELECT e FROM Event e JOIN e.attendingMembers m WHERE m.id = :memberId"
                 )
+
         })
 
 public class Member {

@@ -8,9 +8,11 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import si.fri.prpo.seminarska.dtos.PaginatedResponse;
 import si.fri.prpo.seminarska.entitete.Event;
+import si.fri.prpo.seminarska.entitete.Member;
 import si.fri.prpo.seminarska.zrna.EventsListBean;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.transaction.Transactional;
 import javax.ws.rs.Produces;
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -137,6 +139,156 @@ public class EventsListResource {
         }
         return Response.status(Response.Status.NOT_FOUND).entity("Events list not found").build();
     }
+    @GET
+    @Path("{eventId}/members")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMembersForEvent(@PathParam("eventId") long eventId) {
+
+        List<Member> members = eventsListBean.getMembersForEvent(eventId);
+        if(members != null) {
+            return Response.ok(members).build();
+
+        }
+        return Response.status(Response.Status.NOT_FOUND).entity("Events list not found").build();
+    }
+
+    @Operation(
+            summary = "Update an event",
+            description = "Updates an event identified by its ID with the provided details."
+    )
+    @APIResponses({
+            @APIResponse(
+                    description = "Event updated successfully",
+                    responseCode = "200",
+                    content = @Content(
+                            schema = @Schema(implementation = Event.class),
+                            mediaType = MediaType.APPLICATION_JSON
+                    )
+            ),
+            @APIResponse(
+                    description = "Event not found",
+                    responseCode = "404",
+                    content = @Content(mediaType = MediaType.TEXT_PLAIN)
+            ),
+            @APIResponse(
+                    description = "Invalid event data",
+                    responseCode = "400",
+                    content = @Content(mediaType = MediaType.TEXT_PLAIN)
+            )
+    })
+    @POST
+    @Path("{eventId}/member")
+    @Transactional
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateEvent(@PathParam("eventId") long eventId, Member member) {
+        if (member == null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Event data cannot be null.").build();
+        }
+
+        Event existingEvent = eventsListBean.getEventById(eventId);
+        if (existingEvent == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity("Event not found.").build();
+        }
+
+        // Save the updated event
+        eventsListBean.updateEvent(eventId, member);
+
+        return Response.ok(existingEvent).build();
+    }
+
+    @POST
+    @Transactional
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createEvent(Event event) {
+        if (event == null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Event data cannot be null.").build();
+        }
+
+        try {
+            // Persist the new event using the bean
+            eventsListBean.createEvent(event);
+
+            // Return the created event with status 201 Created
+            return Response.status(Response.Status.CREATED).entity(event).build();
+        } catch (Exception e) {
+            // Handle errors (e.g., validation errors or persistence errors)
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error creating event: " + e.getMessage()).build();
+        }
+    }
+
+    @DELETE
+    @Path("{eventId}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Operation(
+            summary = "Delete an event",
+            description = "Deletes an event identified by its ID."
+    )
+    @APIResponses({
+            @APIResponse(
+                    description = "Event deleted successfully",
+                    responseCode = "200",
+                    content = @Content(mediaType = MediaType.TEXT_PLAIN)
+            ),
+            @APIResponse(
+                    description = "Event not found",
+                    responseCode = "404",
+                    content = @Content(mediaType = MediaType.TEXT_PLAIN)
+            )
+    })
+    @Transactional
+    public Response deleteEvent(@PathParam("eventId") long eventId) {
+        boolean isDeleted = eventsListBean.deleteEvent(eventId);
+
+        if (isDeleted) {
+            return Response.ok("Event deleted successfully.").build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).entity("Event not found.").build();
+    }
+
+    @PUT
+    @Path("{eventId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            summary = "Update an event",
+            description = "Updates the details of an event identified by its ID."
+    )
+    @APIResponses({
+            @APIResponse(
+                    description = "Event updated successfully",
+                    responseCode = "200",
+                    content = @Content(
+                            schema = @Schema(implementation = Event.class),
+                            mediaType = MediaType.APPLICATION_JSON
+                    )
+            ),
+            @APIResponse(
+                    description = "Event not found",
+                    responseCode = "404",
+                    content = @Content(mediaType = MediaType.TEXT_PLAIN)
+            ),
+            @APIResponse(
+                    description = "Invalid event data",
+                    responseCode = "400",
+                    content = @Content(mediaType = MediaType.TEXT_PLAIN)
+            )
+    })
+    @Transactional
+    public Response updateEvent(@PathParam("eventId") long eventId, Event updatedEvent) {
+        if (updatedEvent == null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Event data cannot be null.").build();
+        }
+
+        Event event = eventsListBean.updateEvent(eventId, updatedEvent);
+
+        if (event != null) {
+            return Response.ok(event).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).entity("Event not found.").build();
+    }
+
 
 
 }

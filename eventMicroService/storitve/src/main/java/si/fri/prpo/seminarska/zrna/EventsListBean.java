@@ -60,14 +60,19 @@ public class EventsListBean {
         return member;
     }
 
-    public Event updateEvent(long id, Event event) {
+    public Event updateEvent(long id, Member member) {
         Event existingEvent = getEventById(id);
         if (existingEvent == null) {
             return null;
         }
-
-        em.merge(event);
-        return event;
+        try{
+            existingEvent.getAttendingMembers().add(member);
+            em.merge(existingEvent);
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
+        return existingEvent;
     }
 
     public List<Event> getEventsListFor(long memberId) {
@@ -75,4 +80,51 @@ public class EventsListBean {
                 .setParameter("memberId", memberId)
                 .getResultList();
     }
+
+    public List<Member> getMembersForEvent(long eventId) {
+        return em.createNamedQuery("Events.getMembersForEvent", Member.class)
+                .setParameter("eventId", eventId)
+                .getResultList();
+    }
+
+    public Event createEvent(Event event) {
+        try{
+            em.persist(event);
+            return event;
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    public boolean deleteEvent(long eventId) {
+        Event event = em.find(Event.class, eventId);
+
+        if (event != null) {
+            em.remove(event);
+            return true;
+        }
+        return false; // Event not found
+    }
+
+    public Event updateEvent(long eventId, Event updatedEvent) {
+        Event existingEvent = em.find(Event.class, eventId);
+
+        if (existingEvent != null) {
+            // Update the fields of the existing event
+            existingEvent.setName(updatedEvent.getName());
+            existingEvent.setStarts(updatedEvent.getStarts());
+            existingEvent.setPlace(updatedEvent.getPlace());
+            existingEvent.setEnds(updatedEvent.getEnds());
+
+            // Merge the updated entity
+            em.merge(existingEvent);
+
+            return existingEvent;
+        }
+        return null; // Event not found
+    }
+
+
+
 }

@@ -145,7 +145,7 @@ public class EntryFormResource {
 
             // Add signature image
             PDImageXObject signatureImage = PDImageXObject.createFromByteArray(document, signatureBytes, "signature");
-            contentStream.drawImage(signatureImage, 50, 650, 200, 50); // Adjust position and size
+            contentStream.drawImage(signatureImage, 50, 500, 200, 50); // Adjust position and size
             // try y: 500
             contentStream.close();
 

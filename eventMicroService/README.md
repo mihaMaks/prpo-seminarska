@@ -11,6 +11,7 @@ docker run --name event-service --network mynetwork -p 8081:8081 event-service-i
 ```bash
 docker ps
 ```
+export JAVA_HOME=$(/usr/libexec/java_home -v 18)
 TO DO:
 poskusi se enkrat zagnat memberservice na dockerju in eventservice potem da vidis ce se res pogovarjata
 

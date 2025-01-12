@@ -2,6 +2,7 @@ package si.fri.prpo.seminarska.zrna;
 
 import si.fri.prpo.seminarska.entitete.CertificateOfEnrollment;
 import si.fri.prpo.seminarska.entitete.Member;
+import si.fri.prpo.seminarska.entitete.Event;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -141,6 +142,35 @@ public class MembersListBean {
 
         em.merge(member);
         return member;
+    }
+    public Member updateMemberEvents(Long id, Event event) {
+        Member existingMember = null;
+        Event  existingEvent = null;
+        try{
+            existingMember = getMemberById(id);
+            existingEvent = em.find(Event.class, event.getId());
+
+        }catch (Error e){
+            System.out.println(e);
+            return null;
+        }
+        existingEvent.getAttendingMembers().add(existingMember);
+        existingMember.getVisitedEvents().add(event);
+        if (existingMember == null) {
+            return null;
+        }
+        try{
+            em.merge(existingMember);
+            em.merge(existingEvent);
+
+        }catch (Error e){
+            System.out.println(e);
+            return null;
+        }
+        return existingMember;
+    }
+    public Event getEventById(Long id) {
+        return em.find(Event.class, id);
     }
     public Member addCertificateOfEnrollment(Member member, CertificateOfEnrollment certificate) {
         try {

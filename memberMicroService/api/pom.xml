@@ -96,6 +96,10 @@
             <groupId>si.fri.prpo.nakupovanje</groupId>
             <artifactId>member-entitete</artifactId>
         </dependency>
+        <dependency>
+            <groupId>si.fri.prpo.nakupovanje</groupId>
+            <artifactId>member-entitete</artifactId>
+        </dependency>
 
 
     </dependencies>

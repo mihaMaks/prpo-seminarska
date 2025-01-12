@@ -14,7 +14,11 @@ import java.util.List;
 @NamedQueries(value =
         {
                 @NamedQuery(name = "Events.getAll", query = "SELECT n FROM Event n"),
-                @NamedQuery(name = "Events.getAllForId", query = "SELECT n FROM Event n WHERE n.id = :id")
+                @NamedQuery(name = "Events.getAllForId", query = "SELECT n FROM Event n WHERE n.id = :id"),
+                @NamedQuery(
+                        name = "Events.getMembersForEvent",
+                        query = "SELECT e FROM Member e JOIN e.visitedEvents m WHERE m.id = :eventId"
+                )
                 //@NamedQuery(name = "Events.getPast", query = "SELECT n FROM Member n WHERE n.pending = TRUE"),
                 //@NamedQuery(name = "Events.findByNameAndSurname",
                   //      query = "SELECT m FROM Member m WHERE m.name LIKE :name AND m.surname LIKE :surname")

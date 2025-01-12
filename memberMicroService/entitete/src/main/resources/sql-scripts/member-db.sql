@@ -25,3 +25,40 @@ INSERT INTO event_member (event_id, member_id) VALUES (1, 1); -- John attends Te
 INSERT INTO event_member (event_id, member_id) VALUES (2, 1); -- John attends Music Festival
 INSERT INTO event_member (event_id, member_id) VALUES (3, 2); -- Jane attends Art Exhibition
 INSERT INTO event_member (event_id, member_id) VALUES (1, 2); -- Jane also attends Tech Conference
+
+
+-- Example SQL Insert Statements for `members` table with Slovenian names
+
+-- Members (Slovenian names)
+INSERT INTO members (name, surname, dateOfBirth, homeAddress, city, zipCode, email, phoneNumber, status, pending) VALUES ('Matevž', 'Novak', '1985-03-22', 'Cesta v Gorice 12', 'Ljubljana', '1000', 'matevz.novak@example.com', '+38640123456', TRUE, FALSE);
+INSERT INTO members (name, surname, dateOfBirth, homeAddress, city, zipCode, email, phoneNumber, status, pending) VALUES ('Ana', 'Kovač', '1992-07-18', 'Trg republike 4', 'Maribor', '2000', 'ana.kovac@example.com', '+38660234567', TRUE, FALSE);
+INSERT INTO members (name, surname, dateOfBirth, homeAddress, city, zipCode, email, phoneNumber, status, pending) VALUES ('Luka', 'Jovanović', '1980-10-10', 'Rudarska ulica 5', 'Celje', '3000', 'luka.jovanovic@example.com', '+38641122334', TRUE, FALSE);
+INSERT INTO members (name, surname, dateOfBirth, homeAddress, city, zipCode, email, phoneNumber, status, pending) VALUES ('Maja', 'Horvat', '1995-02-03', 'Zeleni trg 7', 'Kranj', '4000', 'maja.horvat@example.com', '+38660876543', TRUE, FALSE);
+INSERT INTO members (name, surname, dateOfBirth, homeAddress, city, zipCode, email, phoneNumber, status, pending) VALUES ('Marko', 'Zupančič', '1988-05-25', 'Gorenjska cesta 21', 'Novo Mesto', '8000', 'marko.zupancic@example.com', '+38660987654', TRUE, FALSE);
+
+-- Pending Members
+INSERT INTO members (name, surname, dateOfBirth, homeAddress, city, zipCode, email, phoneNumber, status, pending) VALUES ('Ivana', 'Potočnik', '1990-04-10', 'Nazarje 2', 'Ljubljana', '1000', 'ivana.potocnik@example.com', '+38660222345', FALSE, TRUE);
+INSERT INTO members (name, surname, dateOfBirth, homeAddress, city, zipCode, email, phoneNumber, status, pending) VALUES ('Tomaž', 'Jereb', '1983-08-15', 'Podgorska cesta 15', 'Maribor', '2000', 'tomaz.jereb@example.com', '+38640456789', FALSE, TRUE);
+INSERT INTO members (name, surname, dateOfBirth, homeAddress, city, zipCode, email, phoneNumber, status, pending) VALUES ('Nina', 'Kranjc', '1997-12-01', 'Ajdovščina 34', 'Koper', '6000', 'nina.kranjc@example.com', '+38660123456', FALSE, TRUE);
+INSERT INTO members (name, surname, dateOfBirth, homeAddress, city, zipCode, email, phoneNumber, status, pending) VALUES ('Filip', 'Knežević', '1986-11-27', 'Šempeter 9', 'Celje', '3000', 'filip.knezevic@example.com', '+38660345678', FALSE, TRUE);
+INSERT INTO members (name, surname, dateOfBirth, homeAddress, city, zipCode, email, phoneNumber, status, pending) VALUES ('Katja', 'Pavli', '1994-03-14', 'Linhartova cesta 10', 'Novo Mesto', '8000', 'katja.pavli@example.com', '+38660654321', FALSE, TRUE);
+
+-- Example Events (Slovenian-themed events)
+INSERT INTO events (name, place, starts, ends) VALUES ('Festival vina', 'Maribor', '2024-05-10 10:00:00', '2024-05-12 18:00:00');
+INSERT INTO events (name, place, starts, ends) VALUES ('Slovenski teden kulture', 'Ljubljana', '2024-06-20 09:00:00', '2024-06-22 21:00:00');
+INSERT INTO events (name, place, starts, ends) VALUES ('Tekmovanje v plezanju', 'Celje', '2024-08-15 09:00:00', '2024-08-15 18:00:00');
+INSERT INTO events (name, place, starts, ends) VALUES ('Muzikalni festival', 'Kranj', '2024-09-05 18:00:00', '2024-09-07 23:59:59');
+INSERT INTO events (name, place, starts, ends) VALUES ('Konferenca o inovacijah', 'Ljubljana', '2024-11-10 08:00:00', '2024-11-10 18:00:00');
+
+-- Associate Members with Events in the Join Table
+-- Matevž Novak attends Festival vina
+INSERT INTO event_member (event_id, member_id) VALUES (6, 10);
+-- Ana Kovač attends Slovenski teden kulture
+INSERT INTO event_member (event_id, member_id) VALUES (7, 11);
+-- Luka Jovanović attends Tekmovanje v plezanju
+INSERT INTO event_member (event_id, member_id) VALUES (8, 12);
+-- Maja Horvat attends Muzikalni festival
+INSERT INTO event_member (event_id, member_id) VALUES (9, 13);
+-- Marko Zupančič attends Konferenca o inovacijah
+INSERT INTO event_member (event_id, member_id) VALUES (10, 14);
+

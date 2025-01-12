@@ -6,14 +6,14 @@ import java.util.List;
 
 
 public class PaginatedResponse<T> {
-    private List<T> members;
+    private List<T> events;
     private int page;
     private int size;
     private long totalCount;
     private int totalPages;
 
-    public PaginatedResponse(List<T> members, int page, int size, long totalCount, int totalPages) {
-        this.members = members;
+    public PaginatedResponse(List<T> events, int page, int size, long totalCount, int totalPages) {
+        this.events = events;
         this.page = page;
         this.size = size;
         this.totalCount = totalCount;
@@ -21,12 +21,12 @@ public class PaginatedResponse<T> {
     }
 
     // Getters and setters
-    public List<T> getMembers() {
-        return members;
+    public List<T> getEvents() {
+        return events;
     }
 
-    public void setMembers(List<T> members) {
-        this.members = members;
+    public void setEvents(List<T> Events) {
+        this.events = events;
     }
 
     public int getPage() {
